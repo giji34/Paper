@@ -1,0 +1,59 @@
+From 3c843ebfaa0555a80588f3cb7a48a8276d02a0a8 Mon Sep 17 00:00:00 2001
+From: kbinani <kbinani.bt@gmail.com>
+Date: Fri, 19 Mar 2021 01:47:02 +0900
+Subject: [PATCH] Disable MONSTER_ROOM, EMERALD_ORE, and INFESTED_STONE
+ decorator
+
+
+diff --git a/src/main/java/net/minecraft/server/BiomeDecoratorGroups.java b/src/main/java/net/minecraft/server/BiomeDecoratorGroups.java
+index 99ec5b872..de9d93e12 100644
+--- a/src/main/java/net/minecraft/server/BiomeDecoratorGroups.java
++++ b/src/main/java/net/minecraft/server/BiomeDecoratorGroups.java
+@@ -5,15 +5,15 @@ import com.google.common.collect.Lists;
+ public class BiomeDecoratorGroups {
+ 
+     public static void a(BiomeBase biomebase) {
+-        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.a, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.14285715F))));
+-        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.c, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.02F))));
++        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.a, new WorldGenFeatureConfigurationChance(0.14285715F))); // Paper - decompile fix
++        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.c, new WorldGenFeatureConfigurationChance(0.02F))); // Paper - decompile fix
+     }
+ 
+     public static void b(BiomeBase biomebase) {
+-        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.a, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.06666667F))));
+-        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.c, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.02F))));
+-        biomebase.a(WorldGenStage.Features.LIQUID, BiomeBase.a(WorldGenCarverAbstract.d, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.02F))));
+-        biomebase.a(WorldGenStage.Features.LIQUID, BiomeBase.a(WorldGenCarverAbstract.e, (WorldGenCarverConfiguration) (new WorldGenFeatureConfigurationChance(0.06666667F))));
++        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.a, new WorldGenFeatureConfigurationChance(0.06666667F))); // Paper - decompile fix
++        biomebase.a(WorldGenStage.Features.AIR, BiomeBase.a(WorldGenCarverAbstract.c, new WorldGenFeatureConfigurationChance(0.02F))); // Paper - decompile fix
++        biomebase.a(WorldGenStage.Features.LIQUID, BiomeBase.a(WorldGenCarverAbstract.d, new WorldGenFeatureConfigurationChance(0.02F))); // Paper - decompile fix
++        biomebase.a(WorldGenStage.Features.LIQUID, BiomeBase.a(WorldGenCarverAbstract.e, new WorldGenFeatureConfigurationChance(0.06666667F))); // Paper - decompile fix
+     }
+ 
+     public static void c(BiomeBase biomebase) {
+@@ -42,7 +42,7 @@ public class BiomeDecoratorGroups {
+     }
+ 
+     public static void f(BiomeBase biomebase) {
+-        biomebase.a(WorldGenStage.Decoration.UNDERGROUND_STRUCTURES, BiomeBase.a(WorldGenerator.MONSTER_ROOM, WorldGenFeatureConfiguration.e, WorldGenDecorator.F, new WorldGenDecoratorDungeonConfiguration(8)));
++        // biomebase.a(WorldGenStage.Decoration.UNDERGROUND_STRUCTURES, BiomeBase.a(WorldGenerator.MONSTER_ROOM, WorldGenFeatureConfiguration.e, WorldGenDecorator.F, new WorldGenDecoratorDungeonConfiguration(8))); // Paper
+     }
+ 
+     public static void g(BiomeBase biomebase) {
+@@ -67,11 +67,11 @@ public class BiomeDecoratorGroups {
+     }
+ 
+     public static void j(BiomeBase biomebase) {
+-        biomebase.a(WorldGenStage.Decoration.UNDERGROUND_ORES, BiomeBase.a(WorldGenerator.EMERALD_ORE, new WorldGenFeatureReplaceBlockConfiguration(Blocks.STONE.getBlockData(), Blocks.EMERALD_ORE.getBlockData()), WorldGenDecorator.C, WorldGenFeatureDecoratorConfiguration.e));
++        // biomebase.a(WorldGenStage.Decoration.UNDERGROUND_ORES, BiomeBase.a(WorldGenerator.EMERALD_ORE, new WorldGenFeatureReplaceBlockConfiguration(Blocks.STONE.getBlockData(), Blocks.EMERALD_ORE.getBlockData()), WorldGenDecorator.C, WorldGenFeatureDecoratorConfiguration.e)); // Paper
+     }
+ 
+     public static void k(BiomeBase biomebase) {
+-        biomebase.a(WorldGenStage.Decoration.UNDERGROUND_DECORATION, BiomeBase.a(WorldGenerator.ORE, new WorldGenFeatureOreConfiguration(WorldGenFeatureOreConfiguration.Target.NATURAL_STONE, Blocks.INFESTED_STONE.getBlockData(), 9), WorldGenDecorator.n, new WorldGenFeatureChanceDecoratorCountConfiguration(7, 0, 0, 64)));
++        // biomebase.a(WorldGenStage.Decoration.UNDERGROUND_DECORATION, BiomeBase.a(WorldGenerator.ORE, new WorldGenFeatureOreConfiguration(WorldGenFeatureOreConfiguration.Target.NATURAL_STONE, Blocks.INFESTED_STONE.getBlockData(), 9), WorldGenDecorator.n, new WorldGenFeatureChanceDecoratorCountConfiguration(7, 0, 0, 64))); // Paper
+     }
+ 
+     public static void l(BiomeBase biomebase) {
+-- 
+2.30.1
+
