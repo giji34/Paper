@@ -1,0 +1,30 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: kbinani <kbinani.bt@gmail.com>
+Date: Tue, 15 Jun 2021 17:24:16 +0900
+Subject: [PATCH] Fix generateTree to use BlockChangeDelegate
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index c0b49a0eaeda06b89a4fb425eec3d5bfa9717379..e0fcd824c4c67db3717251a538e8c30235861e7c 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+@@ -918,11 +918,18 @@ public class CraftWorld implements World {
+     @Override
+     public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
+         world.captureTreeGeneration = true;
++        world.captureBlockStates = true;
+         boolean grownTree = generateTree(loc, type);
++        world.captureBlockStates = false;
+         world.captureTreeGeneration = false;
+         if (grownTree) { // Copy block data to delegate
+             for (BlockState blockstate : world.capturedBlockStates.values()) {
+-                blockstate.update(true);
++                BlockPosition position = ((CraftBlockState) blockstate).getPosition();
++                net.minecraft.world.level.block.state.IBlockData oldBlock = world.getType(position);
++                int flag = ((CraftBlockState) blockstate).getFlag();
++                delegate.setBlockData(blockstate.getX(), blockstate.getY(), blockstate.getZ(), blockstate.getBlockData());
++                net.minecraft.world.level.block.state.IBlockData newBlock = world.getType(position);
++                world.notifyAndUpdatePhysics(position, null, oldBlock, newBlock, newBlock, flag, 512);
+             }
+             world.capturedBlockStates.clear();
+             return true;
