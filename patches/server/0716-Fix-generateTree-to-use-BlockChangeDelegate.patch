@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: kbinani <kbinani.bt@gmail.com>
+Date: Mon, 21 Jun 2021 06:37:07 +0900
+Subject: [PATCH] Fix generateTree to use BlockChangeDelegate
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index 3403b75c8311f1e52a0533363c5f0307442f8a15..358423317eb95be4ad4de642bd677e550d033042 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+@@ -918,18 +918,22 @@ public class CraftWorld implements World {
+     @Override
+     public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
+         world.captureTreeGeneration = true;
++        world.captureBlockStates = true;
+         boolean grownTree = this.generateTree(loc, type);
++        if (grownTree) {
++            for (BlockState blockstate : world.capturedBlockStates.values()) {
++                blockstate.update(true);
++            }
++        }
++        world.captureBlockStates = false;
+         world.captureTreeGeneration = false;
+         if (grownTree) { // Copy block data to delegate
+             for (BlockState blockstate : world.capturedBlockStates.values()) {
+-                blockstate.update(true);
++                delegate.setBlockData(blockstate.getX(), blockstate.getY(), blockstate.getZ(), blockstate.getBlockData());
+             }
+-            world.capturedBlockStates.clear();
+-            return true;
+-        } else {
+-            world.capturedBlockStates.clear();
+-            return false;
+         }
++        world.capturedBlockStates.clear();
++        return grownTree;
+     }
+ 
+     @Override
