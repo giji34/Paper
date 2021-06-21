@@ -5,10 +5,10 @@ Subject: [PATCH] Better AnnotationTest printout
 
 
 diff --git a/src/test/java/org/bukkit/AnnotationTest.java b/src/test/java/org/bukkit/AnnotationTest.java
-index 03229d5f4ec36a82197beb391356d791ff67fb2f..19271057cf24329757c9419fa6c97848e008a96c 100644
+index 911654d36f6ac708eb38b6df1f7f535a15c05fb8..32af614abd761e39a412422abe2fcb5272a6374c 100644
 --- a/src/test/java/org/bukkit/AnnotationTest.java
 +++ b/src/test/java/org/bukkit/AnnotationTest.java
-@@ -107,13 +107,18 @@ public class AnnotationTest {
+@@ -133,13 +133,18 @@ public class AnnotationTest {
  
          Collections.sort(errors);
  
