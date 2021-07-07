@@ -5,10 +5,10 @@ Subject: [PATCH] Add more line of sight methods
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 0f62182cc570b6a1e687744c01333253456081f4..57c448ee93df76fc2a17c75fafc78408d720ced3 100644
+index 9f57ebcf4f1fafe38ebdf9b78f186e244853101d..0c38298ce04b28bb41b3c10b44b026a9b54c612b 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3424,6 +3424,7 @@ public abstract class LivingEntity extends Entity {
+@@ -3430,6 +3430,7 @@ public abstract class LivingEntity extends Entity {
              Vec3 vec3d = new Vec3(this.getX(), this.getEyeY(), this.getZ());
              Vec3 vec3d1 = new Vec3(entity.getX(), entity.getEyeY(), entity.getZ());
  
