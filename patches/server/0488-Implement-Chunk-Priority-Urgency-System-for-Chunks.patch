@@ -941,10 +941,10 @@ index d94241bcca4f2fd5e464a860bd356af504dc68b7..1cc4e0a1f3d8235ef88b48e01ca8b78a
      }
  }
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd9543812c198b4 100644
+index c28eda68d744c0a1c9229790af3a89dfac94ae22..f72ef5a0f97119732babc0ea353658cef52d6fe0 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -445,6 +445,26 @@ public class ServerChunkCache extends ChunkSource {
+@@ -446,6 +446,26 @@ public class ServerChunkCache extends ChunkSource {
      public <T> void removeTicketAtLevel(TicketType<T> ticketType, ChunkPos chunkPos, int ticketLevel, T identifier) {
          this.distanceManager.removeTicketAtLevel(ticketType, chunkPos, ticketLevel, identifier);
      }
@@ -971,7 +971,7 @@ index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd95438
      // Paper end - async chunk io
  
      @Nullable
-@@ -485,6 +505,8 @@ public class ServerChunkCache extends ChunkSource {
+@@ -486,6 +506,8 @@ public class ServerChunkCache extends ChunkSource {
              Objects.requireNonNull(completablefuture);
              if (!completablefuture.isDone()) { // Paper
                  // Paper start - async chunk io/loading
@@ -980,7 +980,7 @@ index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd95438
                  this.level.asyncChunkTaskManager.raisePriority(x1, z1, com.destroystokyo.paper.io.PrioritizedTaskQueue.HIGHEST_PRIORITY);
                  com.destroystokyo.paper.io.chunk.ChunkTaskManager.pushChunkWait(this.level, x1, z1);
                  // Paper end
-@@ -493,6 +515,8 @@ public class ServerChunkCache extends ChunkSource {
+@@ -494,6 +516,8 @@ public class ServerChunkCache extends ChunkSource {
              chunkproviderserver_a.managedBlock(completablefuture::isDone);
                  com.destroystokyo.paper.io.chunk.ChunkTaskManager.popChunkWait(); // Paper - async chunk debug
                  this.level.timings.syncChunkLoad.stopTiming(); // Paper
@@ -989,7 +989,7 @@ index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd95438
              } // Paper
              ichunkaccess = (ChunkAccess) ((Either) completablefuture.join()).map((ichunkaccess1) -> {
                  return ichunkaccess1;
-@@ -566,10 +590,12 @@ public class ServerChunkCache extends ChunkSource {
+@@ -567,10 +591,12 @@ public class ServerChunkCache extends ChunkSource {
          if (flag && !currentlyUnloading) {
              // CraftBukkit end
              this.distanceManager.addTicket(TicketType.UNKNOWN, chunkcoordintpair, l, chunkcoordintpair);
@@ -1002,7 +1002,7 @@ index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd95438
                  this.runDistanceManagerUpdates();
                  playerchunk = this.getVisibleChunkIfPresent(k);
                  gameprofilerfiller.pop();
-@@ -578,8 +604,13 @@ public class ServerChunkCache extends ChunkSource {
+@@ -579,8 +605,13 @@ public class ServerChunkCache extends ChunkSource {
                  }
              }
          }
@@ -1018,7 +1018,7 @@ index aaeb50d7980a910ff21f9c1ea903acf994392ef8..82b047364608f6ef38b177079fd95438
      }
  
      private boolean chunkAbsent(@Nullable ChunkHolder holder, int maxLevel) {
-@@ -631,6 +662,7 @@ public class ServerChunkCache extends ChunkSource {
+@@ -632,6 +663,7 @@ public class ServerChunkCache extends ChunkSource {
      }
  
      public boolean runDistanceManagerUpdates() {
@@ -1144,7 +1144,7 @@ index e0c9857a922d8a3f421d7df0f056b82c4775390e..4918f89401cdf6a85d8b71f3e3a66082
              entityplayer1.setPos(entityplayer1.getX(), entityplayer1.getY() + 1.0D, entityplayer1.getZ());
          }
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index ef5cfd14a2adee048a4ebb61349dad1020aa4842..f948d0de66920e562f2edb0171637d586fb6baba 100644
+index 21a3c5fe4cf0ac4f21ffda3d7c0b20f82d4cadf1..2a5f58a87cfe312d2118c1b6ba4df98b046c4db1 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -223,7 +223,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, n
@@ -1174,10 +1174,10 @@ index f72471ac82907a0d5112598b3289689495285944..6e1f8323d028790d1f55d51edb3214d0
              net.minecraft.world.level.chunk.LevelChunk chunk = (net.minecraft.world.level.chunk.LevelChunk) either.left().orElse(null);
              if (chunk != null) addTicket(x, z); // Paper
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index a69b9535c18597fec37ce6b50140188203d2b78d..5aba300b2aa99bcf17fdf19f8203a52bc814168e 100644
+index 638dc61594e86a1423536d2a7fe8405d2451a4ee..ead9c15cfe31d1c9582826ad079691a1f147f3fa 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -889,6 +889,16 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -890,6 +890,16 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
          throw new UnsupportedOperationException("Cannot set rotation of players. Consider teleporting instead.");
      }
  
