@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable Player Collision
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 439dcc6effdc91830d2b7ede9063982998b37120..504efea7b6f50a0d17f4f353781953dfb18bdeca 100644
+index 78f3e00715a5d3a60c341461a7cd4fa52e2492f0..2413ed16de148ea63667dca7ab3ee89fb714cf84 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-@@ -232,4 +232,9 @@ public class PaperConfig {
+@@ -241,4 +241,9 @@ public class PaperConfig {
      private static void regionFileCacheSize() {
          regionFileCacheSize = Math.max(getInt("settings.region-file-cache-size", 256), 4);
      }

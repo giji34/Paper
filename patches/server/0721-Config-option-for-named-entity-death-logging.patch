@@ -5,10 +5,10 @@ Subject: [PATCH] Config option for named entity death logging
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 98b71384508447adc80c2175f8e35e5d86b0c378..f101302892a7f95ffa0e6d63cb69d8a3ddbd67a7 100644
+index 6f51eb31a06922a9d0c3697755c1bfe8baf6cfe2..95d8cf449bf0439fddaf319246fef51e1570b68e 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-@@ -492,6 +492,11 @@ public class PaperConfig {
+@@ -501,6 +501,11 @@ public class PaperConfig {
          deobfuscateStacktraces = getBoolean("settings.loggers.deobfuscate-stacktraces", deobfuscateStacktraces);
      }
  
